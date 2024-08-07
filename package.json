@@ -1,0 +1,47 @@
+{
+  "name": "n2n-fe",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.2.3",
+    "axios": "^1.6.8",
+    "date-fns": "^3.6.0",
+    "dotenv": "^16.4.5",
+    "jsonwebtoken": "^8.5.1",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-date-range": "^2.0.0-alpha.4",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.1.0",
+    "react-redux": "^9.1.1",
+    "react-router-dom": "^6.22.3",
+    "react-select": "^5.8.0",
+    "vite-plugin-svgr": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.19",
+    "buffer": "^6.0.3",
+    "daisyui": "^4.10.2",
+    "empty-module": "^0.0.2",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "postcss": "^8.4.38",
+    "process": "^0.11.10",
+    "sweetalert2": "^11.12.4",
+    "tailwindcss": "^3.4.3",
+    "universal-cookie": "^7.2.0",
+    "vite": "^5.2.0",
+    "vite-plugin-node-polyfills": "^0.21.0"
+  }
+}
