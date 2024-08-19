@@ -8,7 +8,7 @@ const Modal = ({
   const dispatch = useDispatch();
   const { toggleModal } = useSelector(state => state.global);
   return (
-    <dialog className={`modal ${toggleModal?.isOpen && (toggleModal?.modal === modal) ? 'modal-open' : ''}`}>
+    <dialog className={`modal ${toggleModal?.isOpen && (toggleModal?.modal === modal) ? 'modal-open' : ''} text-left`}>
       <div className={`modal-box bg-white ${size === 'fullscreen' ? 'max-w-screen-2xl' : size}`}>
         <p className='text-lg font-bold'>{title}&nbsp;</p>
         <hr className='my-3' />

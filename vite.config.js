@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
+import path from 'path';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
@@ -16,6 +17,9 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
+      '@src': path.resolve(__dirname, 'src'),
+      '@assets': path.resolve(__dirname, 'src/assets'),
+      '@global': path.resolve(__dirname, 'src/global'),
       crypto: "empty-module",
       assert: "empty-module",
       http: "empty-module",

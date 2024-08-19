@@ -1,39 +1,39 @@
-// import Page404 from './views/404'
-// import Blank from './views/Blank'
+import Page404 from './views/404'
+import Blank from './views/Blank'
 
 // DASHBOARD
 import Dashboard from './views/Dashboard'
 
 // PROJECT
-// import Project from 'views/Project'
-// import ListProject from 'views/Project/ListProject'
-// import SalesFunnel from 'views/Project/ListProject/components/SalesFunnel'
-// import MarkAsActual from 'views/Project/ListProject/components/MarkAsActual'
-// import PeopleAssignment from 'views/Project/PeopleAssignment'
-// import ProjectProfile from 'views/Project/ProjectProfile'
+// import Project from './views/Project'
+import ListProject from './views/Project/ListProject'
+import SalesFunnel from './views/Project/ListProject/components/SalesFunnel'
+import MarkAsActual from './views/Project/ListProject/components/MarkAsActual'
+import PeopleAssignment from './views/Project/PeopleAssignment'
+import ProjectProfile from './views/Project/ProjectProfile'
 
 // REALIZATION
-// import CostIndex from 'views/Realization/Cost'
-// import VendorIndex from 'views/Realization/Vendor'
-// import AddEditVendorRealization from 'views/Realization/Vendor/components/AddEditVendorRealization'
-// import BillingIndex from 'views/Realization/Billing'
-// import AddEditBillingRealization from 'views/Realization/Billing/components/AddEditBillingRealization'
-// import AddEditCostRealization from 'views/Realization/Cost/components/AddEditCostRealization'
+// import CostIndex from './views/Realization/Cost'
+// import VendorIndex from './views/Realization/Vendor'
+// import AddEditVendorRealization from './views/Realization/Vendor/components/AddEditVendorRealization'
+// import BillingIndex from './views/Realization/Billing'
+// import AddEditBillingRealization from './views/Realization/Billing/components/AddEditBillingRealization'
+// import AddEditCostRealization from './views/Realization/Cost/components/AddEditCostRealization'
 
 // STREAMING
-// import RevenueStreamIndex from 'views/Streaming/RevenueStream'
-// import AddEditRevenueStream from 'views/Streaming/RevenueStream/components/AddEditRevenueStream'
-// import CostStreamIndex from 'views/Streaming/CostStream'
-// import AddEditCostStream from 'views/Streaming/CostStream/components/AddEditCostStream'
-// import UserManagement from 'views/UserManagement'
-// import Employee from 'views/Master/Employee'
-// import Rate from 'views/Master/Rate'
-// import AddEditRate from 'views/Master/Rate/components/AddEditRate'
-// import AddEditEmployee from 'views/Master/Employee/components/AddEditEmployee'
-// import Customer from 'views/Master/Customer'
-// import AddEditCustomer from 'views/Master/Customer/components/AddEditCustomer'
-// import Referensi from 'views/Master/Referensi'
-// import AddEditReferensi from 'views/Master/Referensi/components/AddEditReferensi'
+// import RevenueStreamIndex from './views/Streaming/RevenueStream'
+// import AddEditRevenueStream from './views/Streaming/RevenueStream/components/AddEditRevenueStream'
+// import CostStreamIndex from './views/Streaming/CostStream'
+// import AddEditCostStream from './views/Streaming/CostStream/components/AddEditCostStream'
+// import UserManagement from './views/UserManagement'
+// import Employee from './views/Master/Employee'
+// import Rate from './views/Master/Rate'
+// import AddEditRate from './views/Master/Rate/components/AddEditRate'
+// import AddEditEmployee from './views/Master/Employee/components/AddEditEmployee'
+// import Customer from './views/Master/Customer'
+// import AddEditCustomer from './views/Master/Customer/components/AddEditCustomer'
+// import Referensi from './views/Master/Referensi'
+// import AddEditReferensi from './views/Master/Referensi/components/AddEditReferensi'
 
 const routes = [
     {
@@ -47,34 +47,34 @@ const routes = [
 
     /* ===== MENU PROJECT ===== */
     // LIST PROJECT
-    // {
-    //     path: '/add-project',
-    //     component: SalesFunnel,
-    // },
-    // {
-    //     path: '/edit-project',
-    //     component: SalesFunnel,
-    // },
-    // {
-    //     path: '/mark-actual',
-    //     component: MarkAsActual,
-    // },
-    // {
-    //     path: '/list-project',
-    //     component: ListProject,
-    // },
+    {
+        path: '/add-project',
+        component: SalesFunnel,
+    },
+    {
+        path: '/edit-project',
+        component: SalesFunnel,
+    },
+    {
+        path: '/mark-actual',
+        component: MarkAsActual,
+    },
+    {
+        path: '/list-project',
+        component: ListProject,
+    },
 
     // PEOPLE ASSIGNMENT
-    // {
-    //     path: '/people-assignment',
-    //     component: PeopleAssignment,
-    // },
+    {
+        path: '/people-assignment',
+        component: PeopleAssignment,
+    },
 
     // PROJECT PROFILE
-    // {
-    //     path: '/project-profile',
-    //     component: ProjectProfile,
-    // },
+    {
+        path: '/project-profile',
+        component: ProjectProfile,
+    },
 
     /* ===== MENU REALIZATION ===== */
     // COST
@@ -177,14 +177,14 @@ const routes = [
     //     path: '/user-management',
     //     component: UserManagement,
     // },
-    // {
-    //     path: '/404',
-    //     component: Page404,
-    // },
-    // {
-    //     path: '/blank',
-    //     component: Blank,
-    // },
+    {
+        path: '/404',
+        component: Page404,
+    },
+    {
+        path: '/blank',
+        component: Blank,
+    },
 ]
 
 export default routes

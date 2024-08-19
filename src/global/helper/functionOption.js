@@ -1,4 +1,4 @@
-import storeSchema from "global/store";
+import storeSchema from "@src/global/store";
 
 const optionRefByJenis = async (kd_jns, keyword) => {
   try {
