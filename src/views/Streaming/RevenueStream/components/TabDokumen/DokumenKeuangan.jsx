@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import storeSchema from 'global/store';
+import storeSchema from '@global/store';
 import { AiOutlineSave } from "react-icons/ai";
 import { RxPlusCircled } from "react-icons/rx";
-import { swal } from 'global/helper/swal';
+import { swal } from '@global/helper/swal';
 import { IoMdTrash } from 'react-icons/io';
 
 const DokumenKeuangan = ({ data, getDetailProject, detailDocDelivery }) => {

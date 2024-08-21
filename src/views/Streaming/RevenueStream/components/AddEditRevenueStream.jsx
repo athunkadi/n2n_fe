@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { FaArrowLeft } from 'react-icons/fa6'
 import { useLocation, useNavigate } from 'react-router-dom';
 import EditRevenueStream from './Form/EditRevenueStream';
-import storeSchema from 'global/store';
-import { swal } from 'global/helper/swal';
+import storeSchema from '@global/store';
+import { swal } from '@global/helper/swal';
 // import TabDokumen from 'views/Streaming/RevenueStream/components/TabDokumen';
 import TabDokumen from './TabDokumen';
 

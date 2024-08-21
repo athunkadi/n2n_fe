@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { formatCurrency } from 'global/helper/formatCurrency';
-import storeSchema from 'global/store';
+import { formatCurrency } from '@global/helper/formatCurrency';
+import storeSchema from '@global/store';
 import ReactPaginate from 'react-paginate';
 
 const TableCostAdvance = ({ data, setData, setSelectedData, sortBy, rangeDate }) => {

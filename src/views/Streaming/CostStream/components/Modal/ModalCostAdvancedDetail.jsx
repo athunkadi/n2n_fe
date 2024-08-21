@@ -1,16 +1,16 @@
 import React from 'react'
 // import { ReactComponent as BgModal } from 'assets/BgModal.svg';
-import { Modal } from 'components/atoms'
+import { Modal } from '../../../../../components/atoms'
 import { useSelector } from 'react-redux';
 import { IoCalendarOutline, IoRibbonOutline, IoDocumentTextOutline } from 'react-icons/io5';
 import { IoMdCash, IoIosAlarm } from 'react-icons/io';
-import { formatCurrency } from 'global/helper/formatCurrency';
+import { formatCurrency } from '@global/helper/formatCurrency';
 import { AiOutlineDollar } from 'react-icons/ai';
 import { HiOutlineReceiptPercent } from "react-icons/hi2";
 import { RiCoinsLine } from "react-icons/ri";
 import { GrNotes, GrTask } from "react-icons/gr";
 import { CgNotes } from "react-icons/cg";
-import BgModal from 'assets/BgModal.svg';
+import BgModal from '@assets/BgModal.svg';
 import format from 'date-fns/format';
 
 const ModalCostAdvancedDetail = () => {

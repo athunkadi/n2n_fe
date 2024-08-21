@@ -1,6 +1,6 @@
 import React from 'react'
-import { Label, Select } from 'components/atoms'
-import CurrencyInput from 'components/atoms/CurrencyInput'
+import { Label, Select } from '../../../../../components/atoms'
+import CurrencyInput from '../../../../../components/atoms/CurrencyInput'
 
 const EditRevenueStream = ({ dataDetail, setDataDetail, detailDocDelivery, displayStatus, setDisplayStatus }) => {
 

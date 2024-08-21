@@ -1,7 +1,6 @@
 import React from 'react'
-import { Label, Select } from 'components/atoms'
-import CurrencyInput from 'components/atoms/CurrencyInput'
-import format from 'date-fns/format'
+import { Label, Select } from '../../../../../components/atoms'
+import CurrencyInput from '../../../../../components/atoms/CurrencyInput'
 
 const EditCostAdvance = ({ dataDetail, setDataDetail, detailDocDelivery, displayStatus }) => {
 

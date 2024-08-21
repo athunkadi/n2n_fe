@@ -21,10 +21,10 @@ import AddEditBillingRealization from './views/Realization/Billing/components/Ad
 import AddEditCostRealization from './views/Realization/Cost/components/AddEditCostRealization'
 
 // STREAMING
-// import RevenueStreamIndex from './views/Streaming/RevenueStream'
-// import AddEditRevenueStream from './views/Streaming/RevenueStream/components/AddEditRevenueStream'
-// import CostStreamIndex from './views/Streaming/CostStream'
-// import AddEditCostStream from './views/Streaming/CostStream/components/AddEditCostStream'
+import RevenueStreamIndex from './views/Streaming/RevenueStream'
+import AddEditRevenueStream from './views/Streaming/RevenueStream/components/AddEditRevenueStream'
+import CostStreamIndex from './views/Streaming/CostStream'
+import AddEditCostStream from './views/Streaming/CostStream/components/AddEditCostStream'
 // import UserManagement from './views/UserManagement'
 // import Employee from './views/Master/Employee'
 // import Rate from './views/Master/Rate'
@@ -117,22 +117,22 @@ const routes = [
 
     /* ===== MENU STREAMING ===== */
     // REVENUE STREAM
-    // {
-    //     path: '/revenue-stream',
-    //     component: RevenueStreamIndex,
-    // },
-    // {
-    //     path: '/entry-data-revenue-stream',
-    //     component: AddEditRevenueStream,
-    // },
-    // {
-    //     path: '/cost-stream',
-    //     component: CostStreamIndex,
-    // },
-    // {
-    //     path: '/edit-cost-stream',
-    //     component: AddEditCostStream,
-    // },
+    {
+        path: '/revenue-stream',
+        component: RevenueStreamIndex,
+    },
+    {
+        path: '/entry-data-revenue-stream',
+        component: AddEditRevenueStream,
+    },
+    {
+        path: '/cost-stream',
+        component: CostStreamIndex,
+    },
+    {
+        path: '/edit-cost-stream',
+        component: AddEditCostStream,
+    },
 
     // MASTER
     // {

@@ -1,15 +1,15 @@
 import React from 'react'
 // import { ReactComponent as BgModal } from 'assets/BgModal.svg';
-import { Modal } from 'components/atoms'
+import { Modal } from '../../../../../components/atoms'
 import { useSelector } from 'react-redux';
 import { IoCalendarOutline, IoFileTrayFullOutline, IoPersonOutline, IoReceiptOutline } from 'react-icons/io5';
-import { formatCurrency } from 'global/helper/formatCurrency';
+import { formatCurrency } from '@global/helper/formatCurrency';
 import { AiOutlineDollar } from 'react-icons/ai';
 import { HiOutlineReceiptPercent } from "react-icons/hi2";
 import { RiCoinsLine } from "react-icons/ri";
 import { GrNotes, GrTask } from "react-icons/gr";
 import { CgNotes } from "react-icons/cg";
-import BgModal from 'assets/BgModal.svg';
+import BgModal from '@assets/BgModal.svg';
 
 const ModalRevenueDetail = () => {
   const { toggleModal } = useSelector(state => state.global);

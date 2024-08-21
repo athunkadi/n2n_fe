@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import DateRange from 'components/atoms/DateRange';
+import DateRange from '../../../components/atoms/DateRange';
 import { HiOutlineEye, HiOutlinePencilAlt } from 'react-icons/hi';
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoFilterOutline } from 'react-icons/io5';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { swal } from 'global/helper/swal';
-import storeSchema from 'global/store';
+import { swal } from '@global/helper/swal';
+import storeSchema from '@global/store';
 import TableRevenueStream from './components/TableRevenueStream';
 import { setToggleModal } from '../../../redux/n2n/global';
 import ModalRevenueDetail from './components/Modal/ModalRevenueDetail';

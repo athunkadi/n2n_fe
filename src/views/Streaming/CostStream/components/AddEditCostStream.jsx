@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import storeSchema from 'global/store';
+import storeSchema from '@global/store';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { swal } from 'global/helper/swal';
+import { swal } from '@global/helper/swal';
 import { FaArrowLeft } from 'react-icons/fa6';
 import EditCostAdvance from './Form/EditCostAdvance';
 import EditTagihanVendor from './Form/EditTagihanVendor';
