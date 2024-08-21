@@ -25,15 +25,17 @@ import RevenueStreamIndex from './views/Streaming/RevenueStream'
 import AddEditRevenueStream from './views/Streaming/RevenueStream/components/AddEditRevenueStream'
 import CostStreamIndex from './views/Streaming/CostStream'
 import AddEditCostStream from './views/Streaming/CostStream/components/AddEditCostStream'
-// import UserManagement from './views/UserManagement'
-// import Employee from './views/Master/Employee'
-// import Rate from './views/Master/Rate'
-// import AddEditRate from './views/Master/Rate/components/AddEditRate'
-// import AddEditEmployee from './views/Master/Employee/components/AddEditEmployee'
-// import Customer from './views/Master/Customer'
-// import AddEditCustomer from './views/Master/Customer/components/AddEditCustomer'
-// import Referensi from './views/Master/Referensi'
-// import AddEditReferensi from './views/Master/Referensi/components/AddEditReferensi'
+import UserManagement from './views/UserManagement'
+
+// MASTER
+import Employee from './views/Master/Employee'
+import AddEditEmployee from './views/Master/Employee/components/AddEditEmployee'
+import Rate from './views/Master/Rate'
+import AddEditRate from './views/Master/Rate/components/AddEditRate'
+import Referensi from './views/Master/Referensi'
+import AddEditReferensi from './views/Master/Referensi/components/AddEditReferensi'
+import Customer from './views/Master/Customer'
+import AddEditCustomer from './views/Master/Customer/components/AddEditCustomer'
 
 const routes = [
     {
@@ -135,48 +137,48 @@ const routes = [
     },
 
     // MASTER
-    // {
-    //     path: '/employee-master',
-    //     component: Employee,
-    // },
-    // {
-    //     path: '/add-employee-master',
-    //     component: AddEditEmployee,
-    // },
-    // {
-    //     path: '/rate-master',
-    //     component: Rate,
-    // },
-    // {
-    //     path: '/add-rate-master',
-    //     component: AddEditRate,
-    // },
-    // {
-    //     path: '/referensi-master',
-    //     component: Referensi,
-    // },
-    // {
-    //     path: '/add-referensi-master',
-    //     component: AddEditReferensi,
-    // },
-    // {
-    //     path: '/customer-master',
-    //     component: Customer,
-    // },
-    // {
-    //     path: '/add-customer-master',
-    //     component: AddEditCustomer,
-    // },
-    // {
-    //     path: '/edit-customer-master',
-    //     component: AddEditCustomer,
-    // },
+    {
+        path: '/employee-master',
+        component: Employee,
+    },
+    {
+        path: '/add-employee-master',
+        component: AddEditEmployee,
+    },
+    {
+        path: '/rate-master',
+        component: Rate,
+    },
+    {
+        path: '/add-rate-master',
+        component: AddEditRate,
+    },
+    {
+        path: '/referensi-master',
+        component: Referensi,
+    },
+    {
+        path: '/add-referensi-master',
+        component: AddEditReferensi,
+    },
+    {
+        path: '/customer-master',
+        component: Customer,
+    },
+    {
+        path: '/add-customer-master',
+        component: AddEditCustomer,
+    },
+    {
+        path: '/edit-customer-master',
+        component: AddEditCustomer,
+    },
 
     // USER MANAGEMENT
-    // {
-    //     path: '/user-management',
-    //     component: UserManagement,
-    // },
+    {
+        path: '/user-management',
+        component: UserManagement,
+    },
     {
         path: '/404',
         component: Page404,
