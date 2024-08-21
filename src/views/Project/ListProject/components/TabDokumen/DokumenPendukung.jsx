@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import storeSchema from '@src/global/store';
+import storeSchema from '@global/store';
 import { AiOutlineSave } from "react-icons/ai";
 import { RxPlusCircled } from "react-icons/rx";
-import { swal } from '@src/global/helper/swal';
+import { swal } from '@global/helper/swal';
 import { IoMdTrash } from 'react-icons/io';
 
 const DokumenPendukung = ({ location, data, getDetailProject, isDetailModalAkselerasi, isVendorRealization, isBillingRealization }) => {
@@ -95,6 +95,7 @@ const DokumenPendukung = ({ location, data, getDetailProject, isDetailModalAksel
       const values = [...dataFields];
       const targetValue = values[i];
       if (targetValue?.status?.canDelete === true) {
+        swal.loading();
         const res = await storeSchema.actions.deleteDokumen(targetValue?.dokumen_id);
         if (res?.status === true) {
           await swal.success(res?.data);
@@ -114,6 +115,7 @@ const DokumenPendukung = ({ location, data, getDetailProject, isDetailModalAksel
   const handleUpload = async (e, i) => {
     e.preventDefault();
     try {
+      swal.loading();
       const value = dataFields[i];
       const payload = {
         tipe_dokumen: "01", // dokumen pendukung
@@ -131,7 +133,7 @@ const DokumenPendukung = ({ location, data, getDetailProject, isDetailModalAksel
       if (res?.status === true) {
         await swal.success(res?.data?.keterangan);
       } else {
-        await swal.error(res?.message);
+        await swal.custom('Tidak Dapat Disimpan !', res?.message, 'error');
       };
       getDetailProject();
     } catch (error) {
@@ -165,12 +167,12 @@ const DokumenPendukung = ({ location, data, getDetailProject, isDetailModalAksel
                         className='input input-sm input-bordered rounded-[25px] w-full bg-white'
                         value={item?.no_dokumen}
                         onChange={(e) => {
-                          if (item?.status?.canDelete || (data?.FLAG_EDIT === false)) {
+                          if (item?.status?.canDelete || (!isBillingRealization && data?.FLAG_EDIT === false)) {
                             return
                           };
                           handleChange(e, index)
                         }}
-                        disabled={item?.status?.canDelete || (data?.FLAG_EDIT === false) || isDetailModalAkselerasi}
+                        disabled={item?.status?.canDelete || (!isBillingRealization && data?.FLAG_EDIT === false) || isDetailModalAkselerasi}
                       />
                     </td>
                     <td className='w-1/6'>
@@ -180,12 +182,12 @@ const DokumenPendukung = ({ location, data, getDetailProject, isDetailModalAksel
                         className='input input-sm input-bordered rounded-[25px] w-full bg-white'
                         value={item?.tgl_dokumen}
                         onChange={(e) => {
-                          if (item?.status?.canDelete || (data?.FLAG_EDIT === false)) {
+                          if (item?.status?.canDelete || (!isBillingRealization && data?.FLAG_EDIT === false)) {
                             return
                           };
                           handleChange(e, index)
                         }}
-                        disabled={item?.status?.canDelete || (data?.FLAG_EDIT === false) || isDetailModalAkselerasi}
+                        disabled={item?.status?.canDelete || (!isBillingRealization && data?.FLAG_EDIT === false) || isDetailModalAkselerasi}
                       />
                     </td>
                     <td className='w-1/5'>
@@ -194,7 +196,7 @@ const DokumenPendukung = ({ location, data, getDetailProject, isDetailModalAksel
                         className='select select-sm w-full input-bordered rounded-[25px] bg-white disabled:bg-neutral-300 disabled:text-gray-500'
                         onChange={(e) => handleChange(e, index)}
                         value={item?.jns_dokumen}
-                        disabled={item?.status?.canDelete || (data?.FLAG_EDIT === false) || isDetailModalAkselerasi}
+                        disabled={item?.status?.canDelete || (!isBillingRealization && data?.FLAG_EDIT === false) || isDetailModalAkselerasi}
                       >
                         <option key={0} value="" disabled></option>
                         {optJenisDok?.map((data, i) => {
@@ -219,12 +221,12 @@ const DokumenPendukung = ({ location, data, getDetailProject, isDetailModalAksel
                           name={"upload_dokumen"}
                           className='flex-1 file-input file-input-sm file-input-bordered file-input-primary rounded-[25px] bg-white'
                           onChange={(e) => {
-                            if (item?.status?.canDelete || (data?.FLAG_EDIT === false)) {
+                            if (item?.status?.canDelete || (!isBillingRealization && data?.FLAG_EDIT === false)) {
                               return
                             };
                             setFile(e.target.files[0])
                           }}
-                          disabled={item?.status?.canDelete || (data?.FLAG_EDIT === false) || isDetailModalAkselerasi}
+                          disabled={item?.status?.canDelete || (!isBillingRealization && data?.FLAG_EDIT === false) || isDetailModalAkselerasi}
                         />
                       )}
                       {(

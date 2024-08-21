@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, Link, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import SidebarSubmenu from './SidebarSubmenu';
-import LogoPsd from '../../../assets/psdlogo.svg'
-import BATIK_SIDEBAR from '../../../assets/BATIK_SIDEBAR.png'
+import LogoPSD from '@assets/PSD_LOGO.svg'
+import BATIK_SIDEBAR from '@assets/BATIK_SIDEBAR.png'
 
 const Sidebar = () => {
   const location = useLocation();
@@ -41,8 +41,7 @@ const Sidebar = () => {
                   submenu: menu[0]?.submenu,
                 }
               }}>
-                {/* <LogoPsd/> */}
-                <img src={LogoPsd}></img>
+                <img src={LogoPSD} />
               </Link>
             </li>
             {

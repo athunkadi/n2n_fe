@@ -1,4 +1,5 @@
 import { api } from '../helper/axiosInstance';
+import { getCookies } from '@global/helper/cookie';
 
 const n2nGetService = {
   getListMenu: async (kd_ref) => {
@@ -34,7 +35,7 @@ const n2nGetService = {
       return error.response;
     }
   },
-  getListProject: async ({ page, limit, status, tab_status, order = "DESC", keyword = "", project_type_id }) => {
+  getListProject: async ({ page, limit, status, tab_status, order = "DESC", keyword = "", project_type_id, startDate = '', endDate = '' }) => {
     try {
       const response = await api.get("/getListProject", {
         params: {
@@ -44,7 +45,9 @@ const n2nGetService = {
           tab_status,
           order,
           keyword,
-          project_type_id
+          project_type_id,
+          startDate,
+          endDate
         }
       });
       return response.data;
@@ -52,7 +55,26 @@ const n2nGetService = {
       return error.response;
     }
   },
-  getListProjectForCostPersonil: async ({ page, limit, status, tab_status, order = "DESC", keyword = "" }) => {
+  getListProjectForCostAdvanced: async ({ page, limit, status, tab_status, order = "DESC", keyword = "", startDate = '', endDate = '' }) => {
+    try {
+      const response = await api.get("/getListProjectForCostAdvanced", {
+        params: {
+          page,
+          limit,
+          status,
+          tab_status,
+          order,
+          keyword,
+          startDate,
+          endDate
+        }
+      });
+      return response.data;
+    } catch (error) {
+      return error.response;
+    }
+  },
+  getListProjectForCostPersonil: async ({ page, limit, status, tab_status, order = "DESC", keyword = "", startDate = '', endDate = '' }) => {
     try {
       const response = await api.get("/getListProjectForCostPersonil", {
         params: {
@@ -61,7 +83,9 @@ const n2nGetService = {
           status,
           tab_status,
           order,
-          keyword
+          keyword,
+          startDate,
+          endDate
         }
       });
       return response.data;
@@ -69,7 +93,7 @@ const n2nGetService = {
       return error.response;
     }
   },
-  getListProjectForCostOperasional: async ({ page, limit, status, tab_status, order = "DESC", keyword = "" }) => {
+  getListProjectForCostOperasional: async ({ page, limit, status, tab_status, order = "DESC", keyword = "", startDate = '', endDate = '' }) => {
     try {
       const response = await api.get("/getListProjectForCostOperasional", {
         params: {
@@ -78,7 +102,9 @@ const n2nGetService = {
           status,
           tab_status,
           order,
-          keyword
+          keyword,
+          startDate,
+          endDate
         }
       });
       return response.data;
@@ -86,7 +112,7 @@ const n2nGetService = {
       return error.response;
     }
   },
-  getListProjectForVendorProjectBilling: async ({ page, limit, status, tab_status, order = "DESC", keyword = "" }) => {
+  getListProjectForVendorProjectBilling: async ({ page, limit, status, tab_status, order = "DESC", keyword = "", startDate = '', endDate = '' }) => {
     try {
       const response = await api.get("/getListProjectForVendorProjectBilling", {
         params: {
@@ -95,7 +121,9 @@ const n2nGetService = {
           status,
           tab_status,
           order,
-          keyword
+          keyword,
+          startDate,
+          endDate
         }
       });
       return response.data;
@@ -103,7 +131,7 @@ const n2nGetService = {
       return error.response;
     }
   },
-  getListProjectForTagihanVendor: async ({ page, limit, status, tab_status, order = "DESC", keyword = "" }) => {
+  getListProjectForTagihanVendor: async ({ page, limit, status, tab_status, order = "DESC", keyword = "", startDate = '', endDate = '' }) => {
     try {
       const response = await api.get("/getListProjectForTagihanVendor", {
         params: {
@@ -112,7 +140,9 @@ const n2nGetService = {
           status,
           tab_status,
           order,
-          keyword
+          keyword,
+          startDate,
+          endDate
         }
       });
       return response.data;
@@ -186,9 +216,11 @@ const n2nGetService = {
   },
   getDetailProject: async (project_id) => {
     try {
+      const accessAccount = getCookies('accountAccess')
       const response = await api.get("/getDetailProject", {
         params: {
-          project_id
+          project_id,
+          kode: accessAccount?.kode
         }
       });
       return response.data;
@@ -213,6 +245,30 @@ const n2nGetService = {
       const response = await api.get("/getDetailCostPersonil", {
         params: {
           project_id
+        }
+      });
+      return response.data;
+    } catch (error) {
+      return error.response;
+    }
+  },
+  getDetailCostAdvance: async (cost_revenue_id) => {
+    try {
+      const response = await api.get("/getDetailCostAdvance", {
+        params: {
+          cost_revenue_id
+        }
+      });
+      return response.data;
+    } catch (error) {
+      return error.response;
+    }
+  },
+  getDetailTagihanVendor: async (billing_revenue_id) => {
+    try {
+      const response = await api.get("/getDetailTagihanVendor", {
+        params: {
+          billing_revenue_id
         }
       });
       return response.data;
@@ -353,9 +409,19 @@ const n2nGetService = {
       return error.response;
     }
   },
-  getListProjectVendor: async () => {
+  getListProjectVendor: async ({page, limit, order, keyword, project_type_id, startDate = '', endDate = ''}) => {
     try {
-      const response = await api.get("/getListProjectVendor");
+      const response = await api.get("/getListProjectVendor", {
+        params: {
+          page,
+          limit,
+          order,
+          keyword,
+          project_type_id,
+          startDate,
+          endDate
+        }
+      });
       return response.data;
     } catch (error) {
       return error.response;
@@ -405,14 +471,16 @@ const n2nGetService = {
       return error.response;
     }
   },
-  getListBillingRevenue: async ({ page, limit, order = "DESC", keyword = "" }) => {
+  getListBillingRevenue: async ({ page, limit, order = "DESC", keyword = "", startDate = '', endDate = ''}) => {
     try {
       const response = await api.get("/getListBillingRevenue", {
         params: {
           page,
           limit,
           order,
-          keyword
+          keyword,
+          startDate,
+          endDate,
         }
       });
       return response.data;
@@ -447,6 +515,21 @@ const n2nGetService = {
   getListCustomer: async ({ page, limit, order = "DESC", keyword = "" }) => {
     try {
       const response = await api.get("/getListCustomer", {
+        params: {
+          page,
+          limit,
+          order,
+          keyword
+        }
+      });
+      return response.data;
+    } catch (error) {
+      return error.response;
+    }
+  },
+  getListReferensi: async ({ page, limit, order = "DESC", keyword = "" }) => {
+    try {
+      const response = await api.get("/getListReferensi", {
         params: {
           page,
           limit,

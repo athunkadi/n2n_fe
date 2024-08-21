@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-// import UnderConstruction from 'views/UnderConstruction';
 import Dashboard2 from '@assets/dashboard2.svg'
 import { getCookies } from '@global/helper/cookie';
 import { decodeData } from '@global/helper/jwt';
@@ -72,8 +71,8 @@ const Dashboard = () => {
           <img src={Dashboard2} className='rounded-l-[15px] h-full' />
           <div className="flex items-center justify-center">
             <div className='flex flex-col text-white'>
-              <div>
-                <h1 className="min-[1280px]:text-2xl min-[640px]:text-md font-bold">Hi, {loginData?.NAMA} <span role="img" aria-label="wave">👋</span></h1>
+              <div className='flex max-w-60'>
+                <h1 className="min-[1280px]:text-2xl min-[640px]:text-md font-bold text-wrap">Hi, {loginData?.NAMA} <span role="img" aria-label="wave">👋</span></h1>
               </div>
               <div className='min-[1280px]:text-md min-[640px]:text-xs pr-3'>
                 <p>Welcome back, Let's get back to work.</p>

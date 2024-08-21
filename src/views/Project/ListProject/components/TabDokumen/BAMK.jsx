@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import storeSchema from '@src/global/store';
+import storeSchema from '@global/store';
 import { AiOutlineSave } from "react-icons/ai";
 import { RxPlusCircled } from "react-icons/rx";
-import { swal } from '@src/global/helper/swal';
+import { swal } from '@global/helper/swal';
 import { IoMdTrash } from 'react-icons/io';
 
 const BAMK = ({ location, data, getDetailProject, isVendorRealization, isBillingRealization }) => {
@@ -66,6 +66,7 @@ const BAMK = ({ location, data, getDetailProject, isVendorRealization, isBilling
       const values = [...dataFields];
       const targetValue = values[i];
       if (targetValue?.status?.canDelete === true) {
+        swal.loading();
         const res = await storeSchema.actions.deleteDokumenBAMK(data?.PROJECT_ID, targetValue?.dokumen_id);
         if (res?.status === true) {
           await swal.success(res?.data?.delete_dokumen);
@@ -85,6 +86,7 @@ const BAMK = ({ location, data, getDetailProject, isVendorRealization, isBilling
   const handleUpload = async (e, i) => {
     e.preventDefault();
     try {
+      swal.loading();
       const value = dataFields[i];
       const payload = {
         tipe_dokumen: value?.tipe_dokumen,
@@ -103,15 +105,13 @@ const BAMK = ({ location, data, getDetailProject, isVendorRealization, isBilling
       if (res?.status === true) {
         await swal.success(res?.data?.keterangan);
       } else {
-        await swal.error(res?.message);
+        await swal.custom('Tidak Dapat Disimpan !', res?.message, 'error');
       };
       getDetailProject();
     } catch (error) {
       console.error(error);
     };
   };
-
-  console.log('bamk', dataFields);
 
   return (
     <>
@@ -144,7 +144,7 @@ const BAMK = ({ location, data, getDetailProject, isVendorRealization, isBilling
                           };
                           handleChange(e, index)
                         }}
-                        disabled={item?.status?.canDelete}
+                        disabled={item?.status?.canDelete || isVendorRealization}
                       />
                     </td>
                     <td className='w-1/3'>
@@ -159,7 +159,7 @@ const BAMK = ({ location, data, getDetailProject, isVendorRealization, isBilling
                           };
                           handleChange(e, index)
                         }}
-                        disabled={item?.status?.canDelete}
+                        disabled={item?.status?.canDelete || isVendorRealization}
                       />
                     </td>
                     <td className='flex gap-3'>
@@ -185,7 +185,7 @@ const BAMK = ({ location, data, getDetailProject, isVendorRealization, isBilling
                           disabled={item?.status?.canDelete}
                         />
                       )}
-                      {((isVendorRealization || isBillingRealization) || data?.FLAG_EDIT) && (
+                      {((isVendorRealization === false || isBillingRealization) || data?.FLAG_EDIT) && (
                         <div className='flex items-center'>
                           {item?.status?.canUpload && (
                             <div className='btn btn-sm bg-primary text-white' onClick={(e) => handleUpload(e, index)}>
@@ -203,8 +203,8 @@ const BAMK = ({ location, data, getDetailProject, isVendorRealization, isBilling
               </tbody>
             </table>
           </div>
-          {((isVendorRealization || isBillingRealization) || data?.FLAG_EDIT) && (
-            <div type="button" disabled={(dataFields.filter(a => a.status.canUpload === true).length) === 1 ? true : false} className='btn btn-sm ml-3 rounded-[25px] border-none bg-blue-50 text-primary mt-3 w-60 ' onClick={handleAddField}>
+          {((isVendorRealization === false || isBillingRealization) || data?.FLAG_EDIT) && (
+            <div type="button" disabled={(dataFields.length) === 1 ? true : false} className='btn btn-sm ml-3 rounded-[25px] border-none bg-blue-50 text-primary mt-3 w-60 ' onClick={handleAddField}>
               <RxPlusCircled size='20px' /> Add Dokumen BAMK
             </div>
           )}

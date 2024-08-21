@@ -5,15 +5,15 @@ import { BsLightningCharge } from 'react-icons/bs';
 import { HiOutlinePencilAlt } from "react-icons/hi";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoFilterOutline } from "react-icons/io5";
-import Archive from '@src/assets/icons/archive.svg';
-import DateRange from '@src/components/atoms/DateRange';
-import storeSchema from '@src/global/store'
-import { swal } from '@src/global/helper/swal';
+import Archive from '@assets/icons/archive.svg';
+import DateRange from '../../../components/atoms/DateRange';
+import storeSchema from '@global/store'
+import { swal } from '@global/helper/swal';
 // import { getCookies } from 'global/helper/cookie'
 import ModalMarkAs from './components/Modal/ModalMarkAs';
-// import ModalLog from '@src/components/Modal/ModalLogActivity';
-import TableListProject from './components/TableListProject';
-import { setToggleModal } from '@src/redux/n2n/global';
+// import ModalLog from './components/Modal/ModalLogActivity';
+import TableListProject from './components/TableListProject'
+import { setToggleModal } from '@src/redux/n2n/global'
 
 const ListProject = () => {
   const dispatch = useDispatch();
@@ -31,6 +31,10 @@ const ListProject = () => {
   const [keyword, setKeyword] = useState("");
   const [sortBy, setSortBy] = useState("Latest");
   const [noKontrak, setNoKontrak] = useState('');
+  const [rangeDate, setRangeDate] = useState({
+    startDate: '',
+    endDate: ''
+  })
 
   // const getPermission = async () => {
   //   try {
@@ -76,7 +80,9 @@ const ListProject = () => {
           status: tabActive?.kd_status,
           tab_status: tabActive?.tab_status,
           order: sortBy === 'Latest' ? 'DESC' : 'ASC',
-          keyword
+          keyword,
+          startDate: rangeDate?.startDate,
+          endDate: rangeDate?.endDate,
         });
         if (res.message === 'Success') {
           setDataTable(res.data);
@@ -118,7 +124,7 @@ const ListProject = () => {
       return () => clearTimeout(getData)
     }
     // eslint-disable-next-line
-  }, [keyword]);
+  }, [keyword, rangeDate]);
 
   const handleEdit = async (e) => {
     e.preventDefault();
@@ -151,7 +157,7 @@ const ListProject = () => {
       <div className='bg-white px-6 pt-10 h-full'>
         <div className='flex sm:flex-row flex-col gap-5 '>
           {/* <ModalLog toggleModal={toggleModalLog} location={location} /> */}
-          <div className='sm:w-full text-justify'>
+          <div className='sm:w-full text-start'>
             <p className='text-lg font-bold'>Sales Funnel</p>
             <p className='text-base font-light'>View your list sales funnel in here.</p>
           </div>
@@ -176,7 +182,7 @@ const ListProject = () => {
 
             <div className='flex flex-col gap-5  lg:justify-end  sm:w-full sm:flex-row sm:items-center'>
               <div className="relative">
-                <DateRange className={`${(dimensionScreenW < 768 && check) ? 'bringToBack' : ''}`} />
+                <DateRange className={`${(dimensionScreenW < 768 && check) ? 'bringToBack' : ''}`} setRangeDate={setRangeDate}/>
               </div>
               <div className='flex gap-3'>
                 <div className='btn btn-sm rounded-[25px]'>
@@ -207,9 +213,7 @@ const ListProject = () => {
                           <li>
                             <details>
                               <summary className='pl-0'>
-                                {/* <Archive />  */}
-                                <img src={Archive} />
-                                Archive
+                                <img src={Archive} /> Archive
                               </summary>
                               <ul>
                                 {(noKontrak === '' || noKontrak === null) && (
@@ -291,7 +295,7 @@ const ListProject = () => {
               </div>
             </div>
           </div>
-          <div className='self-baseline'>
+          <div className='text-start'>
             {refStatusTab?.map((v, i) => {
               return (
                 <button
@@ -310,7 +314,7 @@ const ListProject = () => {
             })}
           </div>
           <div className={`${(dimensionScreenW < 768 && check) ? 'bringToBack' : ''}`}>
-            <TableListProject navigation={navigation} location={location} refStatusTab={refStatusTab} tabActive={tabActive} data={dataTable} setData={setDataTable} setSelectedData={setSelectedData} sortBy={sortBy} setNoKontrak={setNoKontrak} />
+            <TableListProject navigation={navigation} location={location} refStatusTab={refStatusTab} tabActive={tabActive} data={dataTable} setData={setDataTable} setSelectedData={setSelectedData} sortBy={sortBy} setNoKontrak={setNoKontrak} rangeDate={rangeDate}/>
           </div>
         </div>
       </div>

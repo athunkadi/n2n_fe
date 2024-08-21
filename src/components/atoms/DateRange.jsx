@@ -10,13 +10,20 @@ import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import { useSelector } from 'react-redux'
 
-const DateRange = ({ className }) => {
+const DateRange = ({ className, setRangeDate }) => {
   const { dimensionScreenW } = useSelector(state => state.global);
   // date state
+  function subtractDays(date, days) {
+    const result = new Date(date);
+    result.setDate(result.getDate() - days);
+    return result;
+  }
+
   const [range, setRange] = useState([
     {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 30),
+      startDate: subtractDays(new Date(), 30),
+      endDate: new Date(),
+      // endDate: addDays(new Date(), 30),
       key: 'selection'
     }
   ])
@@ -50,6 +57,16 @@ const DateRange = ({ className }) => {
     }
   }
 
+  useEffect(() => {
+    if (range[0]?.startDate !== range[0]?.endDate) {
+      setRangeDate({
+        startDate: format(range[0]?.startDate, "yyyy-MM-dd"),
+        endDate: format(range[0]?.endDate, "yyyy-MM-dd"),
+      })
+      setOpen(false)
+    }
+  }, [range])
+  
   return (
     <div className={`calendarWrap ${className}`}>
 
@@ -57,9 +74,10 @@ const DateRange = ({ className }) => {
       <input
         value={`${format(range[0].startDate, "dd/MM/yyyy")} to ${format(range[0].endDate, "dd/MM/yyyy")}`}
         readOnly
-        className="input input-sm input-bordered rounded-[25px] w-[12.5rem] text-end text-xs bg-transparent"
+        className="input input-sm input-bordered rounded-[25px] w-[12.5rem] text-end text-xs bg-transparent cursor-pointer"
         onClick={() => setOpen(open => !open)}
-        disabled
+      // onChange={handleChange}
+      // disabled
       />
 
       <div ref={refOne}>

@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate';
 import { formatCurrency } from '@src/global/helper/formatCurrency';
 import storeSchema from '@src/global/store';
 
-const TableListProject = ({ data, setData, tabActive, setSelectedData, sortBy, setNoKontrak }) => {
+const TableListProject = ({ data, setData, tabActive, setSelectedData, sortBy, setNoKontrak, rangeDate }) => {
   const headerSA2Table = ["No", "ID Project", "Nama Project", "Nama Sales", "Tipe Project", "Nama Customer", "Status Billing"];
   let headerTable;
   switch (tabActive?.kd_status) {
@@ -88,6 +88,8 @@ const TableListProject = ({ data, setData, tabActive, setSelectedData, sortBy, s
       status: tabActive?.kd_status,
       tab_status: tabActive?.tab_status,
       order: sortBy === 'Latest' ? 'DESC' : 'ASC',
+      startDate: rangeDate?.startDate,
+      endDate: rangeDate?.endDate
     });
     if (res?.message === 'Success') {
       setData(res?.data)
@@ -106,7 +108,7 @@ const TableListProject = ({ data, setData, tabActive, setSelectedData, sortBy, s
       renewData()
     }
     // eslint-disable-next-line
-  }, [perPage, currentPage])
+  }, [perPage, currentPage, rangeDate])
 
   const changePage = async (e) => {
     const newPage = e.selected + 1;

@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import storeSchema from '@src/global/store';
+import storeSchema from '@global/store';
 import { AiOutlineSave } from "react-icons/ai";
 import { RxPlusCircled } from "react-icons/rx";
-import { swal } from '@src/global/helper/swal';
-import CurrencyInput from '@src/components/atoms/CurrencyInput';
+import { swal } from '@global/helper/swal';
+import CurrencyInput from '../../../../../components/atoms/CurrencyInput';
 import { IoMdTrash } from 'react-icons/io';
 import { FaArrowRight } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import { HiOutlinePencilAlt } from 'react-icons/hi';
-import { setToggleModal } from '../../../../../redux/n2n/global';
+import { setToggleModal } from '@src/redux/n2n/global';
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal } from '@src/components/atoms';
+import { Modal } from '../../../../../components/atoms';
 
 const VendorPlanning = ({ location, data, getDetailProject, isDetailModalAkselerasi, isVendorRealization, isBillingRealization }) => {
   const dispatch = useDispatch();
@@ -56,7 +56,7 @@ const VendorPlanning = ({ location, data, getDetailProject, isDetailModalAkseler
   };
 
   const headerDocumenDeliveryDetail = ['Jenis Dokumen', 'No Dokumen', 'Tanggal Submit', 'Dokumen Penagihan'];
-  const headerTable = (isBillingRealization === true && sub_pro) ? ['Termin', 'Nominal Estimasi Billing', 'Rencana Periode Billing', 'Nominal Realisasi Billing', 'Realisasi Periode Billing', 'Document Delivery'] : ['Nama Calon Vendor', 'Nominal Estimasi Vendor'];
+  const headerTable = (isBillingRealization === true && sub_pro) ? ['Termin', 'Nominal Estimasi Billing', 'Rencana Periode Billing', 'Nominal Realisasi Billing', 'Realisasi Periode Billing', 'Document Delivery'] : ['Nama Calon Vendor', 'Judul Pengerjaan', 'Nominal Estimasi Vendor'];
   const headerListVendor = ["Nama Vendor", "No Kontrak", "Judul Kontrak", "Nominal Kontrak Vendor"];
   const [dataFields, setDataFields] = useState([dummyField]);
   const [dataFields2, setDataFields2] = useState([dummyField]);
@@ -245,6 +245,7 @@ const VendorPlanning = ({ location, data, getDetailProject, isDetailModalAkseler
         const values = [...dataFieldsVendor];
         const targetValue = values[i];
         if (targetValue?.status?.canDelete === true) {
+          swal.loading();
           const res = await storeSchema.actions.deleteBillingCollection(targetValue?.billing_id);
           if (res?.status === true) {
             await swal.success(res?.data);
@@ -264,6 +265,7 @@ const VendorPlanning = ({ location, data, getDetailProject, isDetailModalAkseler
         const values = [...dataFields];
         const targetValue = values[i];
         if (targetValue?.status?.canDelete === true) {
+          swal.loading();
           const res = await storeSchema.actions.deleteVendorPlanning(targetValue?.project_vendor_id);
           if (res?.status === true) {
             await swal.success(res?.data);
@@ -287,6 +289,7 @@ const VendorPlanning = ({ location, data, getDetailProject, isDetailModalAkseler
       const values = [...dataFields2];
       const targetValue = values[i];
       if (targetValue?.status?.canDelete === true) {
+        swal.loading();
         const res = await storeSchema.actions.deleteVendorPlanning(targetValue?.project_vendor_id);
         if (res?.status === true) {
           await swal.success(res?.data);
@@ -306,10 +309,12 @@ const VendorPlanning = ({ location, data, getDetailProject, isDetailModalAkseler
   const handleUploadPlanning = async (e, i) => {
     e.preventDefault();
     try {
+      swal.loading();
       const value = (isBillingRealization || isVendorRealization) ? dataFields[i] : dataFields2[i];
       const payload = {
         nilai_kontrak: value?.nilai_kontrak.replace(",", "."),
         vendor_id: value?.vendor_id,
+        judul_kontrak: value?.judul_kontrak,
         project_id: isVendorRealization === true ? location?.state?.sub_data?.project_vendor_id : data?.PROJECT_ID,
       };
 
@@ -328,6 +333,7 @@ const VendorPlanning = ({ location, data, getDetailProject, isDetailModalAkseler
   const handleUploadVendorBilling = async (e, i) => {
     e.preventDefault();
     try {
+      swal.loading();
       const value = dataFieldsVendor[i];
       const payload = {
         termin: value?.termin,
@@ -353,6 +359,7 @@ const VendorPlanning = ({ location, data, getDetailProject, isDetailModalAkseler
   const handleUpload = async (e, i) => {
     e.preventDefault();
     try {
+      swal.loading();
       const value = (isBillingRealization || isVendorRealization) ? dataFields[i] : dataFields2[i];
       const payload = (isBillingRealization || isVendorRealization) ? {
         nilai_kontrak: value?.nilai_kontrak.replace(",", "."),
@@ -381,6 +388,7 @@ const VendorPlanning = ({ location, data, getDetailProject, isDetailModalAkseler
   const handleUploadDocDelivery = async (e, i) => {
     e.preventDefault();
     try {
+      swal.loading();
       const value = dataFieldsDocDelivery[i];
       const payload = {
         tipe_dokumen: "04", // dokumen delivery
@@ -410,8 +418,8 @@ const VendorPlanning = ({ location, data, getDetailProject, isDetailModalAkseler
 
   const handleSubmitHKP = async (e) => {
     e.preventDefault()
-    swal.loading();
     try {
+      swal.loading();
       const payload = {
         project_id: data?.PROJECT_ID,
         id_tab_status: 'HK1',
@@ -443,8 +451,8 @@ const VendorPlanning = ({ location, data, getDetailProject, isDetailModalAkseler
 
   const handleViewDoc = async (e, billing_id, callback) => {
     e.preventDefault();
-    swal.loading();
     try {
+      swal.loading();
       const res = await storeSchema.actions.getBillingDocument(billing_id);
       if (res?.status === true) {
         swal.close();
@@ -497,6 +505,7 @@ const VendorPlanning = ({ location, data, getDetailProject, isDetailModalAkseler
       const values = [...dataFieldsDocDelivery];
       const targetValue = values[i];
       if (targetValue?.status?.canDelete === true) {
+        swal.loading();
         const res = await storeSchema.actions.deleteDokumen(targetValue?.dokumen_id);
         if (res?.status === true) {
           await swal.success(res?.data);
@@ -642,7 +651,7 @@ const VendorPlanning = ({ location, data, getDetailProject, isDetailModalAkseler
                 <tr className='bg-white'>
                   {headerTable?.map((title, i) => {
                     return (
-                      <th key={i} className={(isBillingRealization && sub_pro) ? '' : 'w-1/2'}>{title}</th>
+                      <th key={i} className={(isBillingRealization && sub_pro) ? '' : 'w-1/3'}>{title}</th>
                     )
                   })}
                   {isBillingRealization && sub_pro && (
@@ -653,7 +662,7 @@ const VendorPlanning = ({ location, data, getDetailProject, isDetailModalAkseler
               <tbody>
                 {!sub_pro && dataFields2?.map((item, index) => (
                   <tr key={index}>
-                    <td className='w-1/2'>
+                    <td className='w-1/3'>
                       <select
                         name={"vendor_id"}
                         className='select select-sm w-full input-bordered rounded-[25px] bg-white disabled:bg-neutral-300 disabled:text-gray-500'
@@ -668,6 +677,16 @@ const VendorPlanning = ({ location, data, getDetailProject, isDetailModalAkseler
                           )
                         })}
                       </select>
+                    </td>
+                    <td className='w-1/3'>
+                      <input
+                        type="text"
+                        name='judul_kontrak'
+                        className='input input-sm input-bordered rounded-[25px] w-full bg-white'
+                        onChange={(e) => handleChangePlanning(e, index)}
+                        value={item?.judul_kontrak}
+                        disabled={item?.status?.canDelete}
+                      />
                     </td>
                     <td className='flex gap-3'>
                       <CurrencyInput

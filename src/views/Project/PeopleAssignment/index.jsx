@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import storeSchema from '@src/global/store';
+import storeSchema from '@global/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import DateRange from '@src/components/atoms/DateRange';
+import DateRange from '../../../components/atoms/DateRange';
 import { IoFilterOutline } from 'react-icons/io5';
 import { IoIosArrowDown } from 'react-icons/io';
 import { HiOutlineEye } from 'react-icons/hi';
 import TablePeopleAssignment from './components/TablePeopleAssignment';
-import { swal } from '@src/global/helper/swal';
-import { Modal } from '@src/components/atoms';
+import { swal } from '@global/helper/swal';
+import { Modal } from '../../../components/atoms';
 import { setToggleModal } from '@src/redux/n2n/global';
-import ProjectID from '@src/assets/icons/RdProjectId.svg';
-import ProjectName from '@src/assets/icons/RdProjectName.svg';
-import TotalCost from '@src/assets/icons/RdTotalCost.svg';
-import { formatCurrency } from '@src/global/helper/formatCurrency';
+import ProjectID from '@assets/icons/RdProjectId.svg';
+import ProjectName from '@assets/icons/RdProjectName.svg';
+import TotalCost from '@assets/icons/RdTotalCost.svg';
+import { formatCurrency } from '@global/helper/formatCurrency';
 
 const PeopleAssignment = () => {
   const dispatch = useDispatch();
@@ -28,6 +28,10 @@ const PeopleAssignment = () => {
   const [selectedData, setSelectedData] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [sortBy, setSortBy] = useState("Latest");
+  const [rangeDate, setRangeDate] = useState({
+    startDate: '',
+    endDate: ''
+  })
 
   const getListTable = async (keyword) => {
     swal.loading();
@@ -38,6 +42,8 @@ const PeopleAssignment = () => {
         order: sortBy === 'Latest' ? 'DESC' : 'ASC',
         keyword,
         project_type_id: 1,
+        startDate: rangeDate?.startDate,
+        endDate: rangeDate?.endDate,
       });
       if (res.message === 'Success') {
         setDataTable(res.data);
@@ -63,7 +69,7 @@ const PeopleAssignment = () => {
       return () => clearTimeout(getData)
     }
     // eslint-disable-next-line
-  }, [keyword]);
+  }, [keyword, rangeDate]);
 
   const handleView = async (e) => {
     e.preventDefault();
@@ -89,70 +95,77 @@ const PeopleAssignment = () => {
         modal={"resourceDetail"}
         size={"w-11/12 max-w-5xl"}
       >
-        <div className='flex flex-row mb-4 text-left'>
-          <div className='flex flex-row'>
-            {/* <ProjectID /> */}
-            <img src={ProjectID} />
-            <div className='ml-2'>
+        <div className='flex flex-wrap mb-4 gap-5'>
+          <div className='flex flex-row gap-3'>
+            <div>
+              <img src={ProjectID} />
+            </div>
+            <div className=''>
               <p className='text-xs font-bold'>ID Project</p>
               <p className='text-xs'>{toggleModal?.dataSelect?.PROJECT_NO}</p>
             </div>
           </div>
-          <div className='flex flex-row ml-6'>
-            {/* <ProjectName /> */}
-            <img src={ProjectName} />
-            <div className='ml-2'>
+          <div className='flex flex-row gap-3'>
+            <div>
+              <img src={ProjectName} />
+            </div>
+            <div className=''>
               <p className='text-xs font-bold'>Nama Project</p>
               <p className='text-xs'>{toggleModal?.dataSelect?.PROJECT_NAME}</p>
             </div>
           </div>
         </div>
-        <table className='table table-md border-separate border-spacing-0 border rounded-md text-left mb-4'>
-          <thead >
-            <tr>
-              {headerTableModal?.map((header, i) => {
-                return (
-                  <th key={i} className='border-b-2 px-4 py-2'>
-                    {header}
-                  </th>
-                )
-              })}
-            </tr>
-          </thead>
-          <tbody>
-            {tableDataModal?.PERSONEL?.length > 0 ? tableDataModal?.PERSONEL?.map((v, i) => {
-              return (
-                <tr key={i}>
-                  <td>{(i + 1)}</td>
-                  <td>{v.UR_POSITION || '-'}</td>
-                  <td>{v.UR_KUALIFIKASI || '-'}</td>
-                  <td>{v.QTY_PERSON || '-'}</td>
-                  <td>{v.UR_SATUAN_PERSON || '-'}</td>
-                  <td>{v.QTY_DATE || '-'}</td>
-                  <td>{v.UR_SATUAN_DATE || '-'}</td>
-                </tr>
-              )
-            }) : (
+        <div className='overflow-auto mb-4'>
+          <table className='table table-md border-separate border-spacing-0 border rounded-md text-left mb-4'>
+            <thead >
               <tr>
-                <td colSpan={headerTableModal?.length}>
-                  <div className='flex justify-center items-center'>
-                    No Data to Display
-                  </div>
-                </td>
+                {headerTableModal?.map((header, i) => {
+                  return (
+                    <th key={i} className='border-b-2 px-4 py-2'>
+                      {header}
+                    </th>
+                  )
+                })}
               </tr>
-            )}
-          </tbody>
-        </table>
-        <div className='flex flex-row bg-stone-200 w-full rounded-full py-2 px-6'>
-          {/* <TotalCost /> */}
-          <img src={TotalCost} />
-          <p className='text-sm px-2 self-center'>Total Cost</p>
-          <p className='text-sm px-2 self-center'>{formatCurrency(tableDataModal?.TOTAL_COST) || '-'}</p>
+            </thead>
+            <tbody>
+              {tableDataModal?.PERSONEL?.length > 0 ? tableDataModal?.PERSONEL?.map((v, i) => {
+                return (
+                  <tr key={i}>
+                    <td>{(i + 1)}</td>
+                    <td>{v.UR_POSITION || '-'}</td>
+                    <td>{v.UR_KUALIFIKASI || '-'}</td>
+                    <td>{v.QTY_PERSON || '-'}</td>
+                    <td>{v.UR_SATUAN_PERSON || '-'}</td>
+                    <td>{v.QTY_DATE || '-'}</td>
+                    <td>{v.UR_SATUAN_DATE || '-'}</td>
+                  </tr>
+                )
+              }) : (
+                <tr>
+                  <td colSpan={headerTableModal?.length}>
+                    <div className='flex justify-center items-center'>
+                      No Data to Display
+                    </div>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+        <div className='flex flex-row justify-between items-center bg-stone-200 w-full rounded-full py-2 px-6'>
+          <div className='flex flex-row'>
+            <img src={TotalCost} />
+            <p className='text-sm px-2 self-center'>Total Cost</p>
+          </div>
+          <div>
+            <p className='text-sm px-2 self-center'>{formatCurrency(tableDataModal?.TOTAL_COST) || '-'}</p>
+          </div>
         </div>
       </Modal>
 
       <div className='bg-white px-6 pt-10 h-full'>
-        <div className='flex sm:flex-row flex-col gap-5 text-left'>
+        <div className='flex sm:flex-row flex-col gap-5 '>
           <div className='sm:w-full'>
             <p className='text-lg font-bold'>People Assignment</p>
             <p className='text-base font-light'>View your list people assignment in here.</p>
@@ -177,7 +190,7 @@ const PeopleAssignment = () => {
 
             <div className='flex flex-col gap-5  lg:justify-end  sm:w-full sm:flex-row sm:items-center'>
               <div className="relative">
-                <DateRange className={`${(dimensionScreenW < 768 && check) ? 'bringToBack' : ''}`} />
+                <DateRange className={`${(dimensionScreenW < 768 && check) ? 'bringToBack' : ''}`} setRangeDate={setRangeDate} />
               </div>
               <div className='flex gap-3'>
                 <div className='btn btn-sm rounded-[25px]'>
@@ -219,7 +232,7 @@ const PeopleAssignment = () => {
             </div>
           </div>
           <div className={`${(dimensionScreenW < 768 && check) ? 'bringToBack' : ''}`}>
-            <TablePeopleAssignment navigation={navigation} location={location} data={dataTable} setData={setDataTable} setSelectedData={setSelectedData} sortBy={sortBy} />
+            <TablePeopleAssignment navigation={navigation} location={location} data={dataTable} setData={setDataTable} setSelectedData={setSelectedData} sortBy={sortBy} rangeDate={rangeDate} />
           </div>
         </div>
       </div>

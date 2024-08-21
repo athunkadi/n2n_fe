@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { formatCurrency } from '@src/global/helper/formatCurrency';
-import storeSchema from '@src/global/store';
+import { formatCurrency } from '@global/helper/formatCurrency';
+import storeSchema from '@global/store';
 import ReactPaginate from 'react-paginate';
 
-const TablePeopleAssignment = ({ data, setData, setSelectedData, sortBy }) => {
+const TablePeopleAssignment = ({ data, setData, setSelectedData, sortBy, rangeDate }) => {
   const headerTable = ["No", "ID Project", "Nama Project", "Total"];
 
   useEffect(() => {
@@ -66,6 +66,8 @@ const TablePeopleAssignment = ({ data, setData, setSelectedData, sortBy }) => {
       limit: perPage,
       order: sortBy === 'Latest' ? 'DESC' : 'ASC',
       project_type_id: 1,
+      startDate: rangeDate?.startDate,
+      endDate: rangeDate?.endDate,
     });
     if (res?.message === 'Success') {
       setData(res?.data)

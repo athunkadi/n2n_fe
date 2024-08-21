@@ -3,14 +3,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { BsLightningCharge } from "react-icons/bs";
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa6';
 import { useDispatch, useSelector } from 'react-redux';
-import { swal } from '@src/global/helper/swal';
-import storeSchema from '@src/global/store';
+import { swal } from '@global/helper/swal';
+import storeSchema from '@global/store';
 import { CbbPlanning, CostPersonilPlanning, DetailForm } from './Form';
 import TabDokumen from './TabDokumen';
 import { setToggleModal } from '../../../../redux/n2n/global';
 import ModalCreateUpdateProject from './Modal/ModalCreateUpdateProject';
 import { badgeStatus, markAsStatus, tabWon } from './DataDummy'
-import { optionPortofolio, optionRefByJenis } from '@src/global/helper/functionOption';
+import { optionPortofolio, optionRefByJenis } from '@global/helper/functionOption';
 
 const SalesFunnel = () => {
   const location = useLocation();
@@ -72,13 +72,13 @@ const SalesFunnel = () => {
   }, []);
 
   const getDetailProject = async () => {
-    swal.loading();
+    // swal.loading();
     try {
       const res = await storeSchema.actions.getDetailProject(data?.project_id);
       if (res?.status === true) {
         setDataDetail(res?.data);
         setCustomer({ label: res?.data?.CUSTOMER_NAME, value: res?.data?.CUSTOMER_ID });
-        swal.close();
+        // swal.close();
       } else {
         swal.error(res?.message);
       }
@@ -163,8 +163,8 @@ const SalesFunnel = () => {
 
   const handleSave = async (e) => {
     e.preventDefault();
-    swal.loading();
     try {
+      swal.loading();
       const form = {
         ...(project === "Edit Project" && {
           project_id: data?.project_id ?? dataDetail?.PROJECT_ID,
@@ -271,7 +271,7 @@ const SalesFunnel = () => {
           )}
         </div>
         {/* FORM */}
-        <div className='text-left'>
+        <div className='text-start'>
           {tabWon?.map((item) => {
             return (
               <div

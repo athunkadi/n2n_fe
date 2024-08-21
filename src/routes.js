@@ -13,12 +13,12 @@ import PeopleAssignment from './views/Project/PeopleAssignment'
 import ProjectProfile from './views/Project/ProjectProfile'
 
 // REALIZATION
-// import CostIndex from './views/Realization/Cost'
-// import VendorIndex from './views/Realization/Vendor'
-// import AddEditVendorRealization from './views/Realization/Vendor/components/AddEditVendorRealization'
-// import BillingIndex from './views/Realization/Billing'
-// import AddEditBillingRealization from './views/Realization/Billing/components/AddEditBillingRealization'
-// import AddEditCostRealization from './views/Realization/Cost/components/AddEditCostRealization'
+import CostIndex from './views/Realization/Cost'
+import VendorIndex from './views/Realization/Vendor'
+import AddEditVendorRealization from './views/Realization/Vendor/components/AddEditVendorRealization'
+import BillingIndex from './views/Realization/Billing'
+import AddEditBillingRealization from './views/Realization/Billing/components/AddEditBillingRealization'
+import AddEditCostRealization from './views/Realization/Cost/components/AddEditCostRealization'
 
 // STREAMING
 // import RevenueStreamIndex from './views/Streaming/RevenueStream'
@@ -78,42 +78,42 @@ const routes = [
 
     /* ===== MENU REALIZATION ===== */
     // COST
-    // {
-    //     path: '/cost-index',
-    //     component: CostIndex,
-    // },
+    {
+        path: '/cost-index',
+        component: CostIndex,
+    },
+    {
+        path: '/edit-cost-realization',
+        component: AddEditCostRealization,
+    },
 
     // VENDOR
-    // {
-    //     path: '/vendor-index',
-    //     component: VendorIndex,
-    // },
-    // {
-    //     path: '/edit-vendor-realization',
-    //     component: AddEditVendorRealization,
-    // },
-    // {
-    //     path: '/add-vendor-realization',
-    //     component: AddEditVendorRealization,
-    // },
+    {
+        path: '/vendor-index',
+        component: VendorIndex,
+    },
+    {
+        path: '/edit-vendor-realization',
+        component: AddEditVendorRealization,
+    },
+    {
+        path: '/add-vendor-realization',
+        component: AddEditVendorRealization,
+    },
 
     // BILLING
-    // {
-    //     path: '/billing-index',
-    //     component: BillingIndex,
-    // },
-    // {
-    //     path: '/edit-billing-realization',
-    //     component: AddEditBillingRealization,
-    // },
-    // {
-    //     path: '/add-billing-realization',
-    //     component: AddEditBillingRealization,
-    // },
-    // {
-    //     path: '/edit-cost-realization',
-    //     component: AddEditCostRealization,
-    // },
+    {
+        path: '/billing-index',
+        component: BillingIndex,
+    },
+    {
+        path: '/edit-billing-realization',
+        component: AddEditBillingRealization,
+    },
+    {
+        path: '/add-billing-realization',
+        component: AddEditBillingRealization,
+    },
 
     /* ===== MENU STREAMING ===== */
     // REVENUE STREAM

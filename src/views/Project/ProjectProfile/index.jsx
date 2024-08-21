@@ -5,8 +5,8 @@ import { IoIosArrowDown } from "react-icons/io";
 import GeneralInfo from './components/GeneralInfo';
 import TopOverview from './components/TopOverview';
 import Project from './components/Project';
-import storeSchema from '@src/global/store';
-import { swal } from '@src/global/helper/swal';
+import storeSchema from '@global/store';
+import { swal } from '@global/helper/swal';
 import VendorOverview from './components/VendorOverview';
 import BudgetOverview from './components/BudgetOverview';
 
@@ -109,13 +109,13 @@ const ProjectProfile = () => {
         <hr className='border-t-2 my-6' />
         {/* TABLE */}
         <div className='flex flex-row'>
-          <div className='flex flex-col gap-5 w-[35%] border-r-2'>
-            <div className='flex lg:flex-row flex-col gap-1'>
+          <div className='flex flex-col w-[35%] shadow-xl'>
+            <div className='flex lg:flex-row flex-col rounded-t-lg gap-1 px-1 py-5 bg-primary'>
               <div>
                 <input
                   type="text"
                   placeholder='Search...'
-                  className='input input-sm input-bordered rounded-[25px] px-3 py-2 bg-transparent'
+                  className='input input-sm input-bordered rounded-[25px] px-3 py-2 bg-white'
                   onChange={handleSearch}
                 // value={keyword}
                 />
@@ -126,9 +126,9 @@ const ProjectProfile = () => {
                     <IoFilterOutline />
                   </div>
                   <div className='flex sm:items-center'>
-                    <span className='mr-2 text-sm font-light'>Sort : </span>
+                    <span className='mr-2 text-sm font-light text-white'>Sort : </span>
                     <div className={`dropdown dropdown-hover dropdown-end ${(dimensionScreenW < 768) ? 'bringToBack' : ''}`}>
-                      <div tabIndex={0} role="button" className="btn btn-sm rounded-[25px] bg-white">{/*sortBy*/} Latest <IoIosArrowDown /></div>
+                      <div tabIndex={0} role="button" className="btn btn-sm rounded-[25px] bg-white">{sortBy} <IoIosArrowDown /></div>
                       <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-white rounded-box w-28">
                         <li onClick={() => setSortBy('Latest')}><div>Latest</div></li>
                         <li onClick={() => setSortBy('Oldest')}><div>Oldest</div></li>
@@ -137,9 +137,6 @@ const ProjectProfile = () => {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className='text-base font-light'>
-              3 New Project
             </div>
             <Project data={data} handleClick={handleClick} projectId={projectId} />
           </div>
